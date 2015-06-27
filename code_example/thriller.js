@@ -19,16 +19,16 @@ board.on("ready", function() {
   var right_wheel = new five.Servo({ pin: 10, type: 'continuous'  }).stop();
 
 
-  process.stdin.resume(); 
-  process.stdin.setEncoding('utf8'); 
-  process.stdin.setRawMode(true); 
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin.setRawMode(true);
 
   var okay = promise.resolve();
 
   var beat = 508;
 
-//helper functions  
-  
+//helper functions
+
 function stop() {
 
       console.log('Stopping');
@@ -40,7 +40,7 @@ function turnleft() {
 
       console.log('Left');
       left_wheel.ccw();
-      right_wheel.ccw();  
+      right_wheel.ccw();
 }
 
 function turnright() {
@@ -61,12 +61,12 @@ function back() {
 
       console.log('Backward');
       left_wheel.cw();
-      right_wheel.ccw(); 
+      right_wheel.ccw();
 }
 
 
   process.stdin.on('keypress', function (ch, key) {
-    
+
 
     if ( !key ) return;
 
@@ -88,13 +88,13 @@ function back() {
 
       console.log('Backward');
       left_wheel.cw();
-      right_wheel.ccw();      
+      right_wheel.ccw();
 
     } else if ( key.name == 'left' ) {
 
       console.log('Left');
       left_wheel.ccw();
-      right_wheel.ccw();      
+      right_wheel.ccw();
 
 
     } else if ( key.name == 'right' ) {
@@ -105,13 +105,13 @@ function back() {
       */
 
    if ( key.name == 'space' ) {
-    
+
         for(var i = 0; i < 10; i++) {
           if(i == 6){
             okay = okay.delay(beat * 2);
             for(var j=0; j < 16; j++){
             okay = okay.then(forward);
-            okay = okay.delay(beat); 
+            okay = okay.delay(beat);
             okay = okay.then(back);
             okay = okay.then(beat);
       }
@@ -131,4 +131,3 @@ function back() {
     }
   });
 });
-
